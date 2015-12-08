@@ -1,2 +1,3 @@
-# YemekKitabi
-Cookbook Web App. A Django-powered application
+# Yemek Kitabı
+
+A cookbook Web app, built with Django.
