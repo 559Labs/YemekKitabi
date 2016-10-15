@@ -112,8 +112,16 @@ class RecipeSource(models.Model):
         ordering = ('name',)
     def __str__(self):
         return u'%s' % self.name
+
+    def get_recipes(self):
+        return Recipe.objects.filter(source=self)
+    get_recipes.short_description = "Recipes"
+
     def get_num_recipes(self):
         return Recipe.objects.filter(source=self).count()
+    get_num_recipes.short_description = "Recipe Count"
+
+
     get_num_recipes.short_description = "Recipe Count"
     def get_absolute_url(self):
         return reverse('yemek_recipesource_detail', args=(self.slug,))
