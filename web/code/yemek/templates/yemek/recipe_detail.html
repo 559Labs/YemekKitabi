@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<ol class="breadcrumb">
+  <li><a href="{% url 'yemek_home' %}">Home</a></li>
+  <li><a href="{% url 'yemek_recipe_list' %}">Recipes</a></li>
+  <li class="active">{{ object.title }}
+    {% if user.is_superuser %}<a href="{{object.get_update_url}}">(Edit)</a>{% endif %}
+  </li>
+</ol>
+
+<h1>{{ object.title }} <small>{{ object.subtitle }}</small></h1>
+
+<p>
+  {{ object.source }}
+  {% if object.time_prep %} / Preparation: {{ object.time_prep }}{% endif %}
+  {% if object.time_cook %} / Cooking Time: {{ object.time_cook }}{% endif %}
+  {% if object.serves %} / Serves {{ object.serves }}{% endif %}
+</p>
+
+<p>{% if object.note %}<p>{{ object.note }}</p>{% endif %}</p>
+
+<div class="row">
+  <div class="col-md-4">
+    <h4>Ingredients</h4>
+    <ul>
+    {% for item in object.get_ingredients %}
+      <li>
+        {{ item.amount }}
+        <strong>{{ item.name }}</strong>
+        {{ item.desc }}
+      </li>
+    {% endfor %}
+    </ul>
+
+  </div>
+  <div class="col-md-8">
+    <h4>Instructions</h4>
+    <ol>
+    {% for step in object.get_steps %}
+      <li>{{ step.name }}</li>
+    {% endfor %}
+    </ol>
+  </div>
+</div>
+
+<p><small>Added: {{ object.created }} / Updated: {{ object.last_updated }}</small></p>
+
+
+{% endblock %}

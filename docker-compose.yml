@@ -1,0 +1,19 @@
+version: '2'
+services:
+
+  db:
+    build: ./db
+    volumes:
+      - ./db/data:/var/lib/postgresql
+      - ./db/run:/run/postgresql
+
+  web:
+    build: ./web
+    command: python manage.py runserver_plus 0.0.0.0:8011
+    volumes:
+      - ./web/code:/code
+#       - ./web/site-packages:/usr/local/lib/python3.6/site-packages
+    ports:
+      - "8011:8011"
+    depends_on:
+      - db
