@@ -27,10 +27,17 @@ class Recipe(models.Model):
         ordering = ('title','subtitle',)
     def __str__(self):
         return u'%s' % self.title
+
     def get_ingredients(self):
         return Ingredient.objects.filter(recipe=self)
     def get_steps(self):
         return RecipeStep.objects.filter(recipe=self)
+
+    def get_ingredient_count(self):
+        return Ingredient.objects.filter(recipe=self).count()
+    def get_step_count(self):
+        return RecipeStep.objects.filter(recipe=self).count()
+
     def get_absolute_url(self):
         return reverse('yemek_recipe_detail', args=(self.slug,))
     def get_update_url(self):

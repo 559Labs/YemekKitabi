@@ -2,10 +2,17 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<p><a class="btn btn-default" href="{% url 'yemek_recipe_list' %}">Recipe Listing</a></p>
+
+<ol class="breadcrumb">
+  <li><a href="{% url 'yemek_home' %}">Home</a></li>
+  <li><a href="{% url 'yemek_recipe_list' %}">Recipes</a></li>
+  <li class="active">Edit</li>
+</ol>
+
 <form method="post">
-{% csrf_token %}
-{{form|crispy}}
-<button class="btn btn-primary" type="submit">Submit</button>
+  {% csrf_token %}
+  {{form|crispy}}
+  <p><button class="btn btn-primary" type="submit">Save</button></p>
 </form>
+
 {% endblock %}

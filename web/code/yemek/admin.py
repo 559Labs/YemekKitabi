@@ -8,12 +8,12 @@ Inlines
 """
 class IngredientInline(admin.TabularInline):
     model = Ingredient
-    extra = 3
+    extra = 20
     suit_classes = 'suit-tab suit-tab-ingredients'
 
 class RecipeStepInline(admin.TabularInline):
     model = RecipeStep
-    extra = 3
+    extra = 20
     suit_classes = 'suit-tab suit-tab-steps'
 
 class RecipeInline(admin.TabularInline):
