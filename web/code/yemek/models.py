@@ -89,9 +89,14 @@ class Collection(models.Model):
         ordering = ('order','name',)
     def __str__(self):
         return u'%s' % self.name
+
+    def get_recipes(self):
+        return Recipe.objects.filter(collection=self)
+    get_recipes.short_description = "Recipes"
     def get_num_recipes(self):
         return Recipe.objects.filter(collection=self).count()
     get_num_recipes.short_description = "Recipe Count"
+
     def get_absolute_url(self):
         return reverse('yemek_collection_detail', args=(self.slug,))
     def get_update_url(self):
